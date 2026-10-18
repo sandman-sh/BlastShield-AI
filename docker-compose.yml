@@ -1,0 +1,18 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: blastshield-falkordb
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+      - "3001:3000"
+    healthcheck:
+      test: ["CMD", "redis-cli", "PING"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - blastshield-falkordb-data:/data
+
+volumes:
+  blastshield-falkordb-data:

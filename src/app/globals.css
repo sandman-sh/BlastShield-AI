@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --text-primary: #0a0a0a;
+    --text-secondary: #52525b;
+    --border-color: #000000;
+    --neon-green: #00FF66;
+    --neon-green-glow: rgba(0, 255, 102, 0.4);
+    --voxel-shadow: 4px 4px 0px #000000;
+    --voxel-shadow-lg: 6px 6px 0px #000000;
+    --voxel-shadow-green: 4px 4px 0px #00FF66;
+    --grid-line: rgba(0, 0, 0, 0.06);
+  }
+
+  html.dark {
+    --bg-main: #060608;
+    --bg-surface: #0f1013;
+    --bg-surface-elevated: #16181d;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --border-color: #00FF66;
+    --neon-green: #00FF66;
+    --neon-green-glow: rgba(0, 255, 102, 0.6);
+    --voxel-shadow: 4px 4px 0px #00FF66;
+    --voxel-shadow-lg: 6px 6px 0px #00FF66;
+    --voxel-shadow-green: 4px 4px 0px #ffffff;
+    --grid-line: rgba(0, 255, 102, 0.12);
+  }
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Voxel Isometric Grid Background */
+.voxel-grid {
+  background-size: 28px 28px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+/* Voxel Box Styling */
+.voxel-box {
+  background-color: var(--bg-surface);
+  border: 3px solid var(--border-color);
+  box-shadow: var(--voxel-shadow);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.voxel-box-green {
+  background-color: var(--bg-surface);
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px #00FF66;
+}
+
+html.dark .voxel-box-green {
+  border: 3px solid #00FF66;
+  box-shadow: 4px 4px 0px #ffffff;
+}
+
+.voxel-box-elevated {
+  background-color: var(--bg-surface-elevated);
+  border: 3px solid var(--border-color);
+  box-shadow: var(--voxel-shadow-lg);
+}
+
+/* Voxel Buttons */
+.voxel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1.2rem;
+  border: 3px solid var(--border-color);
+  box-shadow: var(--voxel-shadow);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.08s ease;
+}
+
+.voxel-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--border-color);
+}
+
+.voxel-btn-primary {
+  background-color: #00FF66;
+  color: #000000;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+html.dark .voxel-btn-primary {
+  background-color: #00FF66;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 4px 4px 0px #ffffff;
+}
+
+.voxel-btn-primary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.voxel-btn-danger {
+  background-color: #ff3366;
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+html.dark .voxel-btn-danger {
+  border-color: #ffffff;
+  box-shadow: 4px 4px 0px #ffffff;
+}
+
+.voxel-btn-danger:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+/* Voxel Badge */
+.voxel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+/* Glowing Neon pulse */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.4), inset 0 0 4px rgba(0, 255, 102, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(0, 255, 102, 0.8), inset 0 0 8px rgba(0, 255, 102, 0.4);
+  }
+}
+
+.neon-glow {
+  animation: neon-pulse 2s infinite ease-in-out;
+}
+
+/* Voxel Cube Icon Style */
+.voxel-cube-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: #00FF66;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Voxel Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface-elevated);
+  border: 2px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FF66;
+  border: 2px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc52;
+}
