@@ -4,6 +4,7 @@ import { GraphNode, GraphEdge, BlastRadiusReport, RemediationResult, FalkorStatu
 
 const FALKOR_HOST = process.env.FALKORDB_HOST || '127.0.0.1';
 const FALKOR_PORT = parseInt(process.env.FALKORDB_PORT || '6379', 10);
+const FALKOR_USERNAME = process.env.FALKORDB_USERNAME;
 const DEFAULT_GRAPH = process.env.FALKORDB_GRAPH || 'blastshield_infra';
 
 function safeGraphName(graphName: string) {
@@ -102,9 +103,10 @@ async function getClient(): Promise<any> {
   const client = createClient({
     url: process.env.FALKORDB_URL || `redis://${FALKOR_HOST}:${FALKOR_PORT}`,
     socket: {
-      connectTimeout: 2000,
+      connectTimeout: 8000,
       reconnectStrategy: false,
     },
+    ...(FALKOR_USERNAME ? { username: FALKOR_USERNAME } : {}),
     ...(process.env.FALKORDB_PASSWORD
       ? { password: process.env.FALKORDB_PASSWORD }
       : {}),
